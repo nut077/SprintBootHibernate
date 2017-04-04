@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" type="text/css" th:href="@{../css/bulma.css}"/>
+  <title>Customer</title>
+</head>
+<body>
+  <table th:class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="list: ${customer}">
+      <td th:text="${list.id}"></td>
+      <td th:text="${list.firstName}"></td>
+      <td th:text="${list.lastName}"></td>
+      <td th:text="${list.email}"></td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>
