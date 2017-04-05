@@ -21,5 +21,6 @@ public class Customer {
     @NotBlank
     private String lastName;
     @Email
+    @NotBlank
     private String email;
 }

@@ -1,28 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/main">
 <head>
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" type="text/css" th:href="@{../css/bulma.css}"/>
   <title>Customer</title>
 </head>
 <body>
-  <table th:class="table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="list: ${customer}">
-      <td th:text="${list.id}"></td>
-      <td th:text="${list.firstName}"></td>
-      <td th:text="${list.lastName}"></td>
-      <td th:text="${list.email}"></td>
-    </tr>
-    </tbody>
-  </table>
+  <main layout:fragment="content">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="customer: ${customers}">
+        <td th:text="${customer.firstName}"></td>
+        <td th:text="${customer.lastName}"></td>
+        <td th:text="${customer.email}"></td>
+        <td><a th:href="|@{/customer/form-update}/${customer.id}|">Update</a></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="block">
+      <a class="button is-info" th:href="@{/customer/form-add}">Add Customer</a>
+    </div>
+  </main>
 </body>
 </html>
