@@ -22,12 +22,15 @@
         <td th:text="${customer.firstName}"></td>
         <td th:text="${customer.lastName}"></td>
         <td th:text="${customer.email}"></td>
-        <td><a th:href="|@{/customer/form-update}/${customer.id}|">Update</a></td>
+        <td>
+          <a th:href="|@{/admin/customer/form-update}/${customer.id}|">Update</a>&nbsp;|&nbsp;
+          <a th:href="|@{/admin/customer/form-delete}/${customer.id}|" onclick="if (!confirm('Are you sure want to delete this customer?')) return false;">Delete</a>
+        </td>
       </tr>
       </tbody>
     </table>
     <div class="block">
-      <a class="button is-info" th:href="@{/customer/form-add}">Add Customer</a>
+      <a class="button is-info" th:href="@{/admin/customer/form-add}">Add Customer</a>
     </div>
   </main>
 </body>

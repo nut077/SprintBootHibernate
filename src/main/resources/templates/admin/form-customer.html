@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="layouts/main">
+<head>
+  <title>Customer</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <form th:action="@{/admin/customer/save}" th:object="${customer}" th:method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="field">
+          <label class="label">First name</label>
+          <p class="control">
+            <input th:field="*{firstName}" th:type="text" class="input" placeholder="First name"/>
+          </p>
+          <div th:if="${#fields.hasErrors('firstName')}">
+            <div class="notification is-danger" th:errors="*{firstName}">
+              <button class="delete"></button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Last name</label>
+          <p class="control">
+            <input th:field="*{lastName}" th:type="text" class="input" placeholder="Last name"/>
+          </p>
+          <div th:if="${#fields.hasErrors('lastName')}">
+            <div class="notification is-danger" th:errors="*{lastName}">
+              <button class="delete"></button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Email</label>
+          <p class="control">
+            <input th:field="*{email}" th:type="text" class="input" placeholder="Email"/>
+          </p>
+          <div th:if="${#fields.hasErrors('email')}">
+            <div class="notification is-danger" th:errors="*{email}">
+              <button class="delete"></button>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <a class="button is-info" th:href="@{/admin/customer/list}">Back</a>
+          <input th:type="submit" class="button is-info" th:value="Save"/>
+        </div>
+      </div>
+    </div>
+  </form>
+</main>
+</body>
+</html>

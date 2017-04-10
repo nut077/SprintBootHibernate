@@ -2,7 +2,6 @@ package com.nutfreedom.service.impl;
 
 import com.nutfreedom.model.Role;
 import com.nutfreedom.model.User;
-import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,19 +11,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
-
     private User user;
+
+    public UserDetailsImpl(User user) {
+        this.user = user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new HashSet<>();
         List<Role> roles = user.getRoles();
         authorities.addAll(
-          roles.stream()
-            .map(role -> new SimpleGrantedAuthority(role.getRole()))
-            .collect(Collectors.toList())
+            roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRole()))
+                .collect(Collectors.toList())
         );
         return authorities;
     }

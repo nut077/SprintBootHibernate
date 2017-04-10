@@ -15,7 +15,6 @@ public class Role {
     @Id
     private String name;
     private String role;
-
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
@@ -27,7 +26,7 @@ public class Role {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + name.hashCode();
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
@@ -40,6 +39,11 @@ public class Role {
         if (getClass() != obj.getClass())
             return false;
         Role role = (Role) obj;
-        return name.equals(role.name);
+        if (name == null) {
+            if (role.name != null)
+                return false;
+        } else if (!name.equals(role.name))
+            return false;
+        return true;
     }
 }

@@ -9,5 +9,6 @@ public interface CustomerService {
     List<Customer> findAllByOrderByLastName();
     List<Customer> findAllByOrderByFirstName();
     void save(Customer customer);
+    void delete(int id);
     Customer findById(int id);
 }

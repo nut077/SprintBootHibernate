@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/admin/customer")
 public class CustomerController {
 
     @Autowired
@@ -23,28 +23,34 @@ public class CustomerController {
     @GetMapping("/list")
     public String listCustomer(Model model) {
         model.addAttribute("customers", customerService.findAllByOrderByFirstName());
-        return "list-customers";
+        return "admin/list-customers";
     }
 
     @GetMapping("/form-add")
     public String formCustomer(Customer customer) {
-        return "form-customer";
+        return "admin/form-customer";
     }
 
     @PostMapping("/save")
     public String saveCustomer(@Valid Customer customer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-             return "form-customer";
+             return "admin/form-customer";
         } else {
             customerService.save(customer);
         }
-        return "redirect:/customer/list";
+        return "redirect:/admin/customer/list";
     }
 
     @GetMapping("/form-update/{id}")
     public String updateCustomer(@PathVariable int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
-        return "form-customer";
+        return "admin/form-customer";
+    }
+
+    @GetMapping("/form-delete/{id}")
+    public String deleteCustomer(@PathVariable int id) {
+        customerService.delete(id);
+        return "redirect:/admin/customer/list";
     }
 
 }
