@@ -12,7 +12,7 @@
   <a th:href="@{/login}" class="button">login</a><br/>
   <a th:href="@{/admin/customer/list}" class="button">customer</a>
   <form sec:authorize="isAuthenticated()" name="form" th:action="@{/logout}" method="post">
-    <a href="javascript:;" class="button" onclick="document.getElementsByName('form')[0].submit();">Logout</a>
+    <a href="javascript:" class="button" onclick="document.getElementsByName('form')[0].submit();">Logout</a>
   </form>
   <h2 sec:authorize="isAuthenticated()">Welcome: <span sec:authentication="name"></span></h2>
 </main>

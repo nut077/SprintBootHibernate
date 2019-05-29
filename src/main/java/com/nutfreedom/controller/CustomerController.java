@@ -2,7 +2,7 @@ package com.nutfreedom.controller;
 
 import com.nutfreedom.model.Customer;
 import com.nutfreedom.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +15,10 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/customer")
+@RequiredArgsConstructor
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @GetMapping("/list")
     public String listCustomer(Model model) {

@@ -3,14 +3,16 @@ package com.nutfreedom.service.impl;
 import com.nutfreedom.model.Role;
 import com.nutfreedom.repository.RoleRepository;
 import com.nutfreedom.service.RoleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
-    private RoleRepository repository;
+    private final RoleRepository repository;
 
     @Override
     public List<Role> findAll() {
@@ -19,6 +21,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findByName(String name) {
-        return repository.findOne(name);
+        Optional<Role> role = repository.findById(name);
+        return role.orElse(null);
     }
 }

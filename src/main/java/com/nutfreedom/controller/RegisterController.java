@@ -3,6 +3,7 @@ package com.nutfreedom.controller;
 import com.nutfreedom.model.Role;
 import com.nutfreedom.model.User;
 import com.nutfreedom.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,9 +15,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class RegisterController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @GetMapping("/register")
     public String register() {

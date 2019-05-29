@@ -3,6 +3,7 @@ package com.nutfreedom.service.impl;
 import com.nutfreedom.model.User;
 import com.nutfreedom.repository.UserRepository;
 import com.nutfreedom.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,15 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAll() {
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void delete(String username) {
-        userRepository.delete(username);
+        userRepository.deleteById(username);
     }
 
     @Override
@@ -44,15 +44,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findOne(username);
+        Optional<User> user = userRepository.findById(username);
+        return user.orElse(null);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findOne(username);
-        if (user == null) {
+        Optional<User> user = userRepository.findById(username);
+        if (user.isPresent()) {
             throw new UsernameNotFoundException(username);
         }
-        return new UserDetailsImpl(user);
+        return new UserDetailsImpl(user.orElse(null));
     }
 }

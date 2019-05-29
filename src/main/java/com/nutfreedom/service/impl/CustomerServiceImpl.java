@@ -3,17 +3,16 @@ package com.nutfreedom.service.impl;
 import com.nutfreedom.model.Customer;
 import com.nutfreedom.repository.CustomerRepository;
 import com.nutfreedom.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Override
     public List<Customer> findAll() {
@@ -37,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void delete(int id) {
-        customerRepository.delete(id);
+        customerRepository.deleteById(id);
     }
 
     @Override
